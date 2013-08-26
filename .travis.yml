@@ -2,9 +2,18 @@ language: java
 
 env:
   global:
-    secure: Mhqj/+8aLRug/RQnvUpC7j/kaxZ/AgDHTZtA5GlRe1cao0ZOLanHyYLLhP81lt4lV/ad11gQxc6IZYhN4W1BQOYkKv2j8I3Fr1giGCUIFCB9W7RCQYxkVCwYCxS4RLUWKrtgb3hLzU06TYpXY7P54E6LlAE67MFa+3cYq451MdA=
+    secure: lMo2XUQpL/BFLeQujz1bVPlI9RPRV+8ngnsroMP1Ll3P9iLS8jf8BmuHaoAQ9ki81M9LVNEJd0IDuGlcY39ufgWgI9KPgVypeUc0+AqBhnyuu/Ct9EkoUbXMJq51NaDnxi+ORwVIHHBj/uvlihJ4mU89tmWZ6yvdzPed28qImds=
+
+branches:
+  only:
+  - master
+
+jdk:
+  - oraclejdk7
+  - openjdk7
+  - openjdk6
+
+script: mvn clean deploy
 
 notifications:
   email: false
-
-script: mvn clean deploy
