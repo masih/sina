@@ -52,7 +52,7 @@ public class StatisticsStateless {
         NumericalRangeValidator.validateRangeLargerThanZeroInclusive(sample_size);
 
         final double confidence_interval;
-        if (sample_size < 1 || NumericalRangeValidator.hasNaN(standard_deviation)) {
+        if (sample_size <= 1 || NumericalRangeValidator.hasNaN(standard_deviation)) {
             confidence_interval = Double.NaN;
         }
         else {

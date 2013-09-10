@@ -81,7 +81,7 @@ public class StatisticsTest {
 
     }
 
-    /** Tests {@link Statistics#addSample(double)}. */
+    /** Tests {@link Statistics#addSample(Number)}. */
     @Test
     public void testAddSample() {
 
