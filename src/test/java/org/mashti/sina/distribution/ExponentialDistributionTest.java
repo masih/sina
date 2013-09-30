@@ -1,20 +1,18 @@
-/*
- * Copyright 2013 Masih Hajiarabderkani
+/**
+ * This file is part of sina.
  *
- * This file is part of Trombone.
- *
- * Trombone is free software: you can redistribute it and/or modify
+ * sina is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Trombone is distributed in the hope that it will be useful,
+ * sina is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Trombone.  If not, see <http://www.gnu.org/licenses/>.
+ * along with sina.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.mashti.sina.distribution;
 
@@ -39,12 +37,12 @@ public class ExponentialDistributionTest {
     };
     //@formatter:on
 
-    /** Tests {@link ExponentialDistribution#ExponentialDistribution(Number)}. */
+    /** Tests {@link ExponentialDistribution#ExponentialDistribution(Double)}. */
     @Test
     public void testExponentialDistribution() {
 
-        final Number[] bad_args = {Double.NEGATIVE_INFINITY, -Double.MAX_VALUE, -1.0, -0.0, +0.0, Double.NaN};
-        for (final Number bad_arg : bad_args) {
+        final Double[] bad_args = {Double.NEGATIVE_INFINITY, -Double.MAX_VALUE, -1.0, -0.0, +0.0, Double.NaN};
+        for (final Double bad_arg : bad_args) {
             try {
                 new ExponentialDistribution(bad_arg);
                 Assert.fail();
@@ -57,12 +55,12 @@ public class ExponentialDistributionTest {
         new ExponentialDistribution(ONE / HALF);
     }
 
-    /** Tests {@link ExponentialDistribution#byMean(Number)}. */
+    /** Tests {@link ExponentialDistribution#byMean(Double)}. */
     @Test
     public void testByMeanNumber() {
 
-        final Number[] bad_args = {Double.NEGATIVE_INFINITY, -Double.MAX_VALUE, -1.0, -0.0, +0.0, Double.NaN};
-        for (final Number bad_arg : bad_args) {
+        final Double[] bad_args = {Double.NEGATIVE_INFINITY, -Double.MAX_VALUE, -1.0, -0.0, +0.0, Double.NaN};
+        for (final Double bad_arg : bad_args) {
             try {
                 ExponentialDistribution.byMean(bad_arg);
                 Assert.fail();

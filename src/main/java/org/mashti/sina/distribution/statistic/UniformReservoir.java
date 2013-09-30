@@ -1,4 +1,20 @@
-package org.mashti.sina.distribution;
+/**
+ * This file is part of sina.
+ *
+ * sina is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * sina is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with sina.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package org.mashti.sina.distribution.statistic;
 
 import com.google.common.util.concurrent.AtomicDoubleArray;
 import java.util.ArrayList;
@@ -97,7 +113,8 @@ public class UniformReservoir {
         do {
             bits = ThreadLocalRandom.current().nextLong() & (~(1L << BITS_PER_LONG));
             val = bits % n;
-        } while (bits - val + (n - 1) < 0L);
+        }
+        while (bits - val + (n - 1) < 0L);
         return val;
     }
 }

@@ -1,3 +1,19 @@
+/**
+ * This file is part of sina.
+ *
+ * sina is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * sina is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with sina.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.mashti.sina.distribution;
 
 import org.apache.commons.math3.util.FastMath;
@@ -32,7 +48,6 @@ public class ZipfDistribution implements ProbabilityDistribution {
     public Number cumulative(final Number x) {
 
         NumericalRangeValidator.validateRange(x, ONE, elements_count, true, true);
-        //TODO optimize
         return generalizedHarmonic(x.intValue(), exponent) / harmonic_n_exp;
     }
 

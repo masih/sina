@@ -1,20 +1,18 @@
-/*
- * Copyright 2013 Masih Hajiarabderkani
+/**
+ * This file is part of sina.
  *
- * This file is part of Trombone.
- *
- * Trombone is free software: you can redistribute it and/or modify
+ * sina is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Trombone is distributed in the hope that it will be useful,
+ * sina is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Trombone.  If not, see <http://www.gnu.org/licenses/>.
+ * along with sina.  If not, see <http://www.gnu.org/licenses/>.
  */
 package org.mashti.sina.util;
 
@@ -39,7 +37,7 @@ public class RandomNumberGeneratorTest {
     @Test
     public void testRandomNumberGeneratorIProbabilityDistribution() {
 
-        final ProbabilityDistribution distribution = new ExponentialDistribution(1);
+        final ProbabilityDistribution distribution = new ExponentialDistribution(1D);
         final RandomNumberGenerator rng = new RandomNumberGenerator(distribution);
         Assert.assertEquals(rng.getProbabilityDistribution(), distribution);
         Assert.assertTrue(rng.generate().doubleValue() > 0);
@@ -51,7 +49,7 @@ public class RandomNumberGeneratorTest {
 
         //@formatter:off
         final Object[][] args = {
-                {new ExponentialDistribution(1), 1, 1.3125911792091947, 0.5277697200942817, 0.2328339031183774, 0.40454111905682183, 3.4344204904877125},
+                {new ExponentialDistribution(1D), 1, 1.3125911792091947, 0.5277697200942817, 0.2328339031183774, 0.40454111905682183, 3.4344204904877125},
                 {new ExponentialDistribution(0.5), 456, 2.8452293916157276, 0.8391831940243457, 2.438998315622579, 1.3042599600809817, 0.1926491876803895},
                 {new WeibullDistribution(1.5, 180), 88, 213.79416676181947, 217.4846985290254, 161.958560863693, 104.65790054884297, 97.63648580955604},
                 {new WeibullDistribution(0.7, 180), 9963, 477.19152415085273, 48.651446228092155, 27.094095227797993, 0.39397769296152974, 288.4787826842495},
