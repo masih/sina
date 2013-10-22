@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with sina.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.mashti.sina.distribution.statistic;
 
 import com.google.common.util.concurrent.AtomicDoubleArray;
@@ -113,8 +114,7 @@ public class UniformReservoir {
         do {
             bits = ThreadLocalRandom.current().nextLong() & (~(1L << BITS_PER_LONG));
             val = bits % n;
-        }
-        while (bits - val + (n - 1) < 0L);
+        } while (bits - val + (n - 1) < 0L);
         return val;
     }
 }
