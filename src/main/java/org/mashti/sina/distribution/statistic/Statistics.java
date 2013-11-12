@@ -62,7 +62,7 @@ public class Statistics extends StatisticsStateless {
             percentile = Double.NaN;
         }
         else {
-            Collections.sort(snapshot); //FIXME optimize
+            Collections.sort(snapshot);
             final int sample_size = snapshot.size();
             final double position = quantile / 100 * (sample_size + 1);
 

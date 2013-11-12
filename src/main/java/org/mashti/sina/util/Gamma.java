@@ -16,7 +16,6 @@
  */
 package org.mashti.sina.util;
 
-import org.apache.commons.math3.util.FastMath;
 import org.mashti.sina.distribution.ProbabilityDistribution;
 
 public final class Gamma {
@@ -26,7 +25,7 @@ public final class Gamma {
                     -.21026444172410488319e-3, .21743961811521264320e-3, -.16431810653676389022e-3, .84418223983852743293e-4, -.26190838401581408670e-4, .36899182659531622704e-5,};
     private static final double LANCZOS_G = 607.0 / 128.0;
     /** Avoid repeated computation of log of 2 PI in logGamma. */
-    private static final double HALF_LOG_2_PI = ProbabilityDistribution.HALF * FastMath.log(ProbabilityDistribution.TWO * FastMath.PI);
+    private static final double HALF_LOG_2_PI = ProbabilityDistribution.HALF * Math.log(ProbabilityDistribution.TWO * Math.PI);
 
     private Gamma() {
 

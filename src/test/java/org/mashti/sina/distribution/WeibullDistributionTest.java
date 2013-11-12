@@ -16,9 +16,12 @@
  */
 package org.mashti.sina.distribution;
 
+import DistLib.weibull;
+import java.util.Random;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mashti.sina.distribution.ProbabilityDistribution.HALF;
 import static org.mashti.sina.distribution.ProbabilityDistribution.ONE;
@@ -108,13 +111,36 @@ public class WeibullDistributionTest {
             Assert.assertEquals(distribution.getScale().doubleValue(), scale, DELTA);
             Assert.assertEquals(distribution.mean().doubleValue(), args[i++], DELTA);
             final double x = args[i++];
-            Assert.assertEquals(distribution.probability(x).doubleValue(), args[i++], DELTA);
+            Assert.assertEquals(distribution.density(x).doubleValue(), args[i++], DELTA);
             Assert.assertEquals(distribution.cumulative(x).doubleValue(), args[i++], DELTA);
             Assert.assertEquals(distribution.quantile(args[i++]).doubleValue(), args[i++], DELTA);
             Assert.assertEquals(distribution.median().doubleValue(), args[i++], DELTA);
             Assert.assertEquals(distribution.mode().doubleValue(), args[i++], DELTA);
             Assert.assertEquals(distribution.skewness().doubleValue(), args[i++], DELTA);
             Assert.assertEquals(distribution.variance().doubleValue(), args[i++], DELTA);
+        }
+    }
+
+    @Test
+    public void testProbability() throws Exception {
+
+        Random random = new Random(654654);
+        for (int i = 0; i < 10000; i++) {
+            final double v1 = StrictMath.abs(random.nextDouble() * random.nextInt());
+            final double v2 = StrictMath.abs(random.nextDouble() * random.nextInt());
+            final WeibullDistribution tt = new WeibullDistribution(v1, v2);
+            final int i1 = Math.abs(random.nextInt());
+
+            final org.apache.commons.math3.distribution.WeibullDistribution tDistribution = new org.apache.commons.math3.distribution.WeibullDistribution(v1, v2);
+            final double actual = tDistribution.density(i1);
+            final double probability = tt.density(i1).doubleValue();
+            final double density = weibull.density(i1, v1, v2);
+            assertEquals(actual, probability, 1.0e-10);
+            assertEquals(actual, density, 1.0e-10);
+
+            final float v = random.nextFloat();
+            assertEquals(tDistribution.inverseCumulativeProbability(v), weibull.quantile(v, v1, v2), 1.0e-5);
+            assertEquals(tDistribution.inverseCumulativeProbability(v), tt.quantile(v).doubleValue(), 1.0e-5);
         }
     }
 }

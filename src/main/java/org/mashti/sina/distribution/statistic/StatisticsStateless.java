@@ -17,13 +17,14 @@
 package org.mashti.sina.distribution.statistic;
 
 import java.util.concurrent.atomic.AtomicLong;
-import org.apache.commons.math3.distribution.TDistribution;
 import org.mashti.sina.distribution.ProbabilityDistribution;
+import org.mashti.sina.distribution.TDistribution;
 import org.mashti.sina.util.AtomicNumber;
 import org.mashti.sina.util.NumericalRangeValidator;
 
 public class StatisticsStateless {
 
+    public static final Double CONFIDENCE_LEVEL_95_PERCENT = 0.95D;
     private final AtomicLong sample_size;
     private final AtomicNumber min;
     private final AtomicNumber max;
@@ -56,7 +57,7 @@ public class StatisticsStateless {
         else {
             final long df = sample_size - 1; // calculate degree of freedom
             final double probability = 1 - (1 - conf_level.doubleValue()) / 2; // calculate equivalent probability
-            confidence_interval = new TDistribution(df).inverseCumulativeProbability(probability) * standard_deviation.doubleValue() / Math.sqrt(sample_size);
+            confidence_interval = new TDistribution(df).quantile(probability).doubleValue() * standard_deviation.doubleValue() / Math.sqrt(sample_size);
         }
 
         return confidence_interval;
@@ -140,9 +141,14 @@ public class StatisticsStateless {
         return standardDeviation(sum.get(), sum_of_squares.get(), sample_size.get());
     }
 
-    public Number getConfidenceInterval(final Number conf_level) {
+    public Number getConfidenceInterval(final Number confidence_level) {
 
-        return confidenceInterval(sample_size.get(), getStandardDeviation(), conf_level);
+        return confidenceInterval(sample_size.get(), getStandardDeviation(), confidence_level);
+    }
+
+    public Number getConfidenceInterval95Percent() {
+
+        return getConfidenceInterval(CONFIDENCE_LEVEL_95_PERCENT);
     }
 
     @Override

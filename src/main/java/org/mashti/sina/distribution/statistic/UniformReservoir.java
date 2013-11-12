@@ -17,10 +17,10 @@
 
 package org.mashti.sina.distribution.statistic;
 
-import com.google.common.util.concurrent.AtomicDoubleArray;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import org.mashti.sina.util.AtomicDoubleArray;
 import org.mashti.sina.util.ThreadLocalRandom;
 
 /**
@@ -114,7 +114,8 @@ public class UniformReservoir {
         do {
             bits = ThreadLocalRandom.current().nextLong() & (~(1L << BITS_PER_LONG));
             val = bits % n;
-        } while (bits - val + (n - 1) < 0L);
+        }
+        while (bits - val + (n - 1) < 0L);
         return val;
     }
 }

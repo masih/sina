@@ -77,7 +77,7 @@ public class UniformDistributionTest {
             Assert.assertEquals(distribution.getHigh().doubleValue(), high, DELTA);
             Assert.assertEquals(distribution.mean().doubleValue(), args[i++], DELTA);
             final double x = args[i++];
-            Assert.assertEquals(distribution.probability(x).doubleValue(), args[i++], DELTA);
+            Assert.assertEquals(distribution.density(x).doubleValue(), args[i++], DELTA);
             Assert.assertEquals(distribution.cumulative(x).doubleValue(), args[i++], DELTA);
             Assert.assertEquals(distribution.quantile(args[i++]).doubleValue(), args[i++], DELTA);
             Assert.assertEquals(distribution.median().doubleValue(), args[i++], DELTA);
