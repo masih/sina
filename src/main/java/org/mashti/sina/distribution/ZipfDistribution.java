@@ -16,7 +16,6 @@
  */
 package org.mashti.sina.distribution;
 
-import org.apache.commons.math3.util.FastMath;
 import org.mashti.sina.util.NumericalRangeValidator;
 
 /** @author Masih Hajiarabderkani (mh638@st-andrews.ac.uk) */
@@ -38,10 +37,10 @@ public class ZipfDistribution implements ProbabilityDistribution {
     }
 
     @Override
-    public Number probability(final Number x) {
+    public Number density(final Number x) {
 
         NumericalRangeValidator.validateRange(x, 1, elements_count, true, true);
-        return ONE / FastMath.pow(x.doubleValue(), exponent) / harmonic_n_exp;
+        return ONE / Math.pow(x.doubleValue(), exponent) / harmonic_n_exp;
     }
 
     @Override
@@ -80,8 +79,10 @@ public class ZipfDistribution implements ProbabilityDistribution {
     @Override
     public Number variance() {
 
-        //TODO implement according to : http://mathworld.wolfram.com/ZipfDistribution.html
-        throw new UnsupportedOperationException("not implemented");
+        final double Hs2 = generalizedHarmonic(elements_count, exponent - 2);
+        final double Hs1 = generalizedHarmonic(elements_count, exponent - 1);
+        final double Hs = generalizedHarmonic(elements_count, exponent);
+        return Hs2 / Hs - Hs1 * Hs1 / (Hs * Hs);
     }
 
     @Override

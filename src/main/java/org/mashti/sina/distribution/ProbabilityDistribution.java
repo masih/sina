@@ -48,7 +48,7 @@ public interface ProbabilityDistribution extends Serializable {
      * @param x the random variable
      * @return the relative likelihood of the occurrence of the random variable <code>x</code>
      */
-    Number probability(Number x);
+    Number density(Number x);
 
     /**
      * Cumulative Distribution Function (CDF).

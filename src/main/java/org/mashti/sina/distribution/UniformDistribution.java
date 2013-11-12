@@ -44,7 +44,7 @@ public class UniformDistribution implements ProbabilityDistribution {
     }
 
     @Override
-    public Number probability(final Number x) {
+    public Number density(final Number x) {
 
         final double x_d = x.doubleValue();
         return x_d < low || x_d > high ? ZERO : ONE / (high - low);

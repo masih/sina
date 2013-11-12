@@ -53,7 +53,7 @@ public class WeibullDistribution implements ProbabilityDistribution {
     }
 
     @Override
-    public Number probability(final Number x) {
+    public Number density(final Number x) {
 
         NumericalRangeValidator.validateRangeLargerThanZeroInclusive(x);
         final double x_by_scale = x.doubleValue() / scale;

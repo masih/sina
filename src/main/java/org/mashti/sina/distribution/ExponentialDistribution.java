@@ -18,6 +18,10 @@ package org.mashti.sina.distribution;
 
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+import static java.lang.Math.pow;
+import static org.mashti.sina.distribution.WeibullDistribution.NATURAL_LOGARITHM_OF_TWO;
 import static org.mashti.sina.util.NumericalRangeValidator.validateRangeLargerThanZeroExclusive;
 import static org.mashti.sina.util.NumericalRangeValidator.validateRangeLargerThanZeroInclusive;
 import static org.mashti.sina.util.NumericalRangeValidator.validateRangeZeroToOneInclusive;
@@ -30,61 +34,50 @@ import static org.mashti.sina.util.NumericalRangeValidator.validateRangeZeroToOn
 public class ExponentialDistribution implements ProbabilityDistribution {
 
     private static final long serialVersionUID = -8780132031221192523L;
-    private final double rate;
+    private final double scale;
 
-    public ExponentialDistribution(final Double rate) {
+    public ExponentialDistribution(final Number mean) {
 
-        validateRangeLargerThanZeroExclusive(rate);
-        this.rate = rate.doubleValue();
+        validateRangeLargerThanZeroExclusive(mean);
+        scale = mean.doubleValue();
     }
 
     public static ExponentialDistribution byMean(final long duration, TimeUnit unit) {
 
-        return byMean(Double.valueOf(TimeUnit.NANOSECONDS.convert(duration, unit)));
-    }
-
-    public static ExponentialDistribution byMean(final Double mean) {
-
-        validateRangeLargerThanZeroExclusive(mean);
-        return new ExponentialDistribution(meanToRate(mean));
-    }
-
-    public Double rate() {
-
-        return rate;
+        return new ExponentialDistribution(Double.valueOf(TimeUnit.NANOSECONDS.convert(duration, unit)));
     }
 
     @Override
-    public Double probability(final Number x) {
+    public Double density(final Number x) {
 
         validateRangeLargerThanZeroInclusive(x);
-        return rate * Math.exp(-rate * x.doubleValue());
+        return exp(-x.doubleValue() / scale) / scale;
     }
 
     @Override
     public Double cumulative(final Number x) {
 
         validateRangeLargerThanZeroInclusive(x);
-        return ONE - Math.exp(-rate * x.doubleValue());
+        return ONE - exp(-x.doubleValue() / scale);
     }
 
     @Override
     public Double quantile(final Number probability) {
 
         validateRangeZeroToOneInclusive(probability);
-        return -Math.log(ONE - probability.doubleValue()) / rate;
+        return -scale * log(ONE - probability.doubleValue());
     }
 
     @Override
     public Double mean() {
 
-        return meanToRate(rate);
+        return scale;
     }
 
     @Override
     public Double median() {
 
-        return mean() * WeibullDistribution.NATURAL_LOGARITHM_OF_TWO;
+        return scale * NATURAL_LOGARITHM_OF_TWO;
     }
 
     @Override
@@ -96,7 +89,7 @@ public class ExponentialDistribution implements ProbabilityDistribution {
     @Override
     public Double variance() {
 
-        return Math.pow(rate, -TWO);
+        return pow(scale, TWO);
     }
 
     @Override
@@ -108,11 +101,6 @@ public class ExponentialDistribution implements ProbabilityDistribution {
     @Override
     public String toString() {
 
-        return new StringBuilder().append("Exponential(mean: ").append(mean()).append(")").toString();
-    }
-
-    private static double meanToRate(final Double mean) {
-
-        return Math.pow(mean, -ONE);
+        return new StringBuilder().append("Exponential(mean: ").append(scale).append(")").toString();
     }
 }
