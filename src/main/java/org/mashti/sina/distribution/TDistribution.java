@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with sina.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.mashti.sina.distribution;
 
 import DistLib.Constants;
@@ -29,7 +30,7 @@ import static org.mashti.sina.util.NumericalRangeValidator.validateRangeZeroToOn
 
 public class TDistribution implements ProbabilityDistribution {
 
-    static private double eps = 1.e-12;
+    private static final double EPS = 1.e-12;
     private final double df;
 
     public TDistribution(final Number degrees_of_freedom) {
@@ -82,10 +83,10 @@ public class TDistribution implements ProbabilityDistribution {
             P = 2 * p;
         }
 
-        if (abs(df - 2) < eps) {
+        if (abs(df - 2) < EPS) {
             q = sqrt(2 / (P * (2 - P)) - 2);
         }
-        else if (df < 1 + eps) {
+        else if (df < 1 + EPS) {
             prob = P * Constants.M_PI_half;
             q = Math.cos(prob) / Math.sin(prob);
         }

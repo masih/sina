@@ -33,7 +33,7 @@ import static org.mashti.sina.distribution.ProbabilityDistribution.ONE;
  */
 public class WeibullDistributionTest {
 
-    public static final double DELTA = 0.0d;
+    public static final double DELTA = 1.0e-8;
     //@formatter:off
     private static final double[][] TEST_INPUT_OUTPUT = {
             {0.8842, 852456, 905853.2908924981, 457, 2.4778507908955887E-6, 0.0012815021029850548, 0.457, 487985.81582461746, 563184.9037453446, Double.NaN, -1.8566473246120316, 1.0545908823268892E12}, {1.5, 50, 45.13726464754669, 11, 0.012691650910201193, 0.09804364473659022, 0.11, 11.929016803104716, 39.160988438732566, 24.037492838456807, -2.4427852784427633, 939.2257120348302}
@@ -135,8 +135,8 @@ public class WeibullDistributionTest {
             final double actual = tDistribution.density(i1);
             final double probability = tt.density(i1).doubleValue();
             final double density = weibull.density(i1, v1, v2);
-            assertEquals(actual, probability, 1.0e-10);
-            assertEquals(actual, density, 1.0e-10);
+            assertEquals(actual, probability, DELTA);
+            assertEquals(actual, density, DELTA);
 
             final float v = random.nextFloat();
             assertEquals(tDistribution.inverseCumulativeProbability(v), weibull.quantile(v, v1, v2), 1.0e-5);
