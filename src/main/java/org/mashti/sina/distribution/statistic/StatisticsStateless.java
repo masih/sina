@@ -14,17 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with sina.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.mashti.sina.distribution.statistic;
 
+import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicLong;
 import org.mashti.sina.distribution.ProbabilityDistribution;
 import org.mashti.sina.distribution.TDistribution;
 import org.mashti.sina.util.AtomicNumber;
 import org.mashti.sina.util.NumericalRangeValidator;
 
-public class StatisticsStateless {
+public class StatisticsStateless implements Serializable {
 
     public static final Double CONFIDENCE_LEVEL_95_PERCENT = 0.95D;
+    private static final long serialVersionUID = -1031882992294342289L;
     private final AtomicLong sample_size;
     private final AtomicNumber min;
     private final AtomicNumber max;

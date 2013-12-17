@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with sina.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.mashti.sina.distribution.statistic;
 
 import java.util.Collections;
@@ -25,6 +26,7 @@ import static org.mashti.sina.distribution.ProbabilityDistribution.ZERO;
 
 public class Statistics extends StatisticsStateless {
 
+    private static final long serialVersionUID = -1822453429009595112L;
     private final UniformReservoir reservoir;
 
     public Statistics() {
@@ -49,7 +51,7 @@ public class Statistics extends StatisticsStateless {
     @Override
     public String toString() {
 
-        return "Statistics [getMax()=" + getMax() + ", getMin()=" + getMin() + ", getMean()=" + getMean() + ", getSampleSize()=" + getSampleSize() + "]";
+        return "Statistics [getMax()=" + getMax() + ", getMin()=" + getMin() + ", getMean()=" + getMean() + ", getSampleSize()=" + getSampleSize() + ']';
     }
 
     public Number getPercentile(final double quantile) {
@@ -62,6 +64,7 @@ public class Statistics extends StatisticsStateless {
             percentile = Double.NaN;
         }
         else {
+            //TODO inefficient?
             Collections.sort(snapshot);
             final int sample_size = snapshot.size();
             final double position = quantile / 100 * (sample_size + 1);

@@ -17,6 +17,7 @@
 
 package org.mashti.sina.distribution.statistic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -29,8 +30,9 @@ import org.mashti.sina.util.ThreadLocalRandom;
  *
  * @see <a href="http://www.cs.umd.edu/~samir/498/vitter.pdf">Random Sampling with a Reservoir</a>
  */
-public class UniformReservoir {
+public class UniformReservoir implements Serializable {
 
+    private static final long serialVersionUID = -2046074870426588279L;
     private static final int DEFAULT_SIZE = 1028;
     private static final int BITS_PER_LONG = 63;
     private final AtomicLong count = new AtomicLong();
@@ -114,8 +116,7 @@ public class UniformReservoir {
         do {
             bits = ThreadLocalRandom.current().nextLong() & (~(1L << BITS_PER_LONG));
             val = bits % n;
-        }
-        while (bits - val + (n - 1) < 0L);
+        } while (bits - val + (n - 1) < 0L);
         return val;
     }
 }

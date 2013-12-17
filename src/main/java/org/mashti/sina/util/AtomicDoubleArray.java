@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with sina.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.mashti.sina.util;
 
 /*
@@ -29,6 +30,7 @@ package org.mashti.sina.util;
  * to use AtomicLongArray instead of sun.misc.Unsafe)
  */
 
+import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicLongArray;
 
 import static java.lang.Double.doubleToRawLongBits;
@@ -38,13 +40,12 @@ import static java.lang.Double.longBitsToDouble;
  * A {@code double} array in which elements may be updated atomically.
  * See the {@link java.util.concurrent.atomic} package specification
  * for description of the properties of atomic variables.
- *
  * <p><a name="bitEquals">This class compares primitive {@code double}
  * values in methods such as {@link #compareAndSet} by comparing their
  * bitwise representation using {@link Double#doubleToRawLongBits},
  * which differs from both the primitive double {@code ==} operator
  * and from {@link Double#equals}, as if implemented by:
- *  <pre> {@code
+ * <pre> {@code
  * static boolean bitEquals(double x, double y) {
  *   long xBits = Double.doubleToRawLongBits(x);
  *   long yBits = Double.doubleToRawLongBits(y);
@@ -55,7 +56,7 @@ import static java.lang.Double.longBitsToDouble;
  * @author Martin Buchholz
  * @since 11.0
  */
-public class AtomicDoubleArray implements java.io.Serializable {
+public class AtomicDoubleArray implements Serializable {
 
     private static final long serialVersionUID = 0L;
     // Making this non-final is the lesser evil according to Effective
@@ -173,7 +174,6 @@ public class AtomicDoubleArray implements java.io.Serializable {
      * updated value
      * if the current value is <a href="#bitEquals">bitwise equal</a>
      * to the expected value.
-     *
      * <p>May <a
      * href="http://download.oracle.com/javase/7/docs/api/java/util/concurrent/atomic/package-summary.html#Spurious">
      * fail spuriously</a>
@@ -228,6 +228,7 @@ public class AtomicDoubleArray implements java.io.Serializable {
 
     /**
      * Returns the String representation of the current values of array.
+     *
      * @return the String representation of the current values of array
      */
     public String toString() {
@@ -238,7 +239,7 @@ public class AtomicDoubleArray implements java.io.Serializable {
         // Double.toString(Math.PI).length() == 17
         StringBuilder b = new StringBuilder((17 + 2) * (iMax + 1));
         b.append('[');
-        for (int i = 0;; i++) {
+        for (int i = 0; ; i++) {
             b.append(longBitsToDouble(longs.get(i)));
             if (i == iMax) { return b.append(']').toString(); }
             b.append(',').append(' ');
@@ -249,7 +250,7 @@ public class AtomicDoubleArray implements java.io.Serializable {
      * Saves the state to a stream (that is, serializes it).
      *
      * @serialData The length of the array is emitted (int), followed by all
-     *             of its elements (each a {@code double}) in the proper order.
+     * of its elements (each a {@code double}) in the proper order.
      */
     private void writeObject(java.io.ObjectOutputStream s) throws java.io.IOException {
 
