@@ -33,8 +33,16 @@ public class StatisticsStateless implements Serializable {
     private final AtomicNumber max;
     private final AtomicNumber sum;
     private final AtomicNumber sum_of_squares;
+    private final boolean skip_nan;
 
     public StatisticsStateless() {
+
+        this(false);
+    }
+
+    public StatisticsStateless(boolean skip_nan) {
+
+        this.skip_nan = skip_nan;
 
         sample_size = new AtomicLong(0);
         min = new AtomicNumber(Double.NaN);
@@ -76,7 +84,11 @@ public class StatisticsStateless implements Serializable {
         return Math.sqrt(distribution.variance().doubleValue());
     }
 
-    public void addSample(final Number value) {
+    public boolean addSample(final Number value) {
+
+        if (Double.isNaN(value.doubleValue()) && skip_nan) {
+            return false;
+        }
 
         final long size = sample_size.incrementAndGet();
         if (size == 1) {
@@ -91,6 +103,7 @@ public class StatisticsStateless implements Serializable {
             sum.addAndGet(value);
             sum_of_squares.addAndGet(squared(value));
         }
+        return true;
     }
 
     public void addSamples(final Number[] samples) {

@@ -14,11 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with sina.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.mashti.sina.distribution;
 
 import DistLib.weibull;
 import java.util.Random;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -60,8 +60,8 @@ public class WeibullDistributionTest {
             final Number shape = good_arg[0];
             final Number scale = good_arg[1];
             final WeibullDistribution test_dist = new WeibullDistribution(shape, scale);
-            Assert.assertEquals(test_dist.getShape().doubleValue(), shape);
-            Assert.assertEquals(test_dist.getScale().doubleValue(), scale);
+            assertEquals(test_dist.getShape().doubleValue(), shape);
+            assertEquals(test_dist.getScale().doubleValue(), scale);
         }
     }
 
@@ -93,8 +93,8 @@ public class WeibullDistributionTest {
             final Number shape = good_arg[0];
             final Number mean = good_arg[1];
             final WeibullDistribution test_dist = WeibullDistribution.byMean(shape, mean);
-            Assert.assertEquals(test_dist.mean(), mean);
-            Assert.assertEquals(test_dist.getShape(), shape);
+            assertEquals(test_dist.mean(), mean);
+            assertEquals(test_dist.getShape(), shape);
         }
     }
 
@@ -107,17 +107,17 @@ public class WeibullDistributionTest {
             final double shape = args[i++];
             final double scale = args[i++];
             final WeibullDistribution distribution = new WeibullDistribution(shape, scale);
-            Assert.assertEquals(distribution.getShape().doubleValue(), shape, DELTA);
-            Assert.assertEquals(distribution.getScale().doubleValue(), scale, DELTA);
-            Assert.assertEquals(distribution.mean().doubleValue(), args[i++], DELTA);
+            assertEquals(distribution.getShape().doubleValue(), shape, DELTA);
+            assertEquals(distribution.getScale().doubleValue(), scale, DELTA);
+            assertEquals(distribution.mean().doubleValue(), args[i++], DELTA);
             final double x = args[i++];
-            Assert.assertEquals(distribution.density(x).doubleValue(), args[i++], DELTA);
-            Assert.assertEquals(distribution.cumulative(x).doubleValue(), args[i++], DELTA);
-            Assert.assertEquals(distribution.quantile(args[i++]).doubleValue(), args[i++], DELTA);
-            Assert.assertEquals(distribution.median().doubleValue(), args[i++], DELTA);
-            Assert.assertEquals(distribution.mode().doubleValue(), args[i++], DELTA);
-            Assert.assertEquals(distribution.skewness().doubleValue(), args[i++], DELTA);
-            Assert.assertEquals(distribution.variance().doubleValue(), args[i++], DELTA);
+            assertEquals(distribution.density(x).doubleValue(), args[i++], DELTA);
+            assertEquals(distribution.cumulative(x).doubleValue(), args[i++], DELTA);
+            assertEquals(distribution.quantile(args[i++]).doubleValue(), args[i++], DELTA);
+            assertEquals(distribution.median().doubleValue(), args[i++], DELTA);
+            assertEquals(distribution.mode().doubleValue(), args[i++], DELTA);
+            assertEquals(distribution.skewness().doubleValue(), args[i++], DELTA);
+            assertEquals(distribution.variance().doubleValue(), args[i++], DELTA);
         }
     }
 

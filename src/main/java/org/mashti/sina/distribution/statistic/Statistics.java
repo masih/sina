@@ -27,18 +27,25 @@ import static org.mashti.sina.distribution.ProbabilityDistribution.ZERO;
 public class Statistics extends StatisticsStateless {
 
     private static final long serialVersionUID = -1822453429009595112L;
-    private final UniformReservoir reservoir;
+    private final UniformReservoir reservoir = new UniformReservoir();
 
     public Statistics() {
 
-        reservoir = new UniformReservoir();
+    }
+
+    public Statistics(boolean skip_nan) {
+
+        super(skip_nan);
     }
 
     @Override
-    public void addSample(final Number value) {
+    public boolean addSample(final Number value) {
 
-        super.addSample(value);
-        reservoir.update(value);
+        if (super.addSample(value)) {
+            reservoir.update(value);
+            return true;
+        }
+        return false;
     }
 
     @Override
