@@ -86,7 +86,7 @@ public class StatisticsStateless implements Serializable {
 
     public boolean addSample(final Number value) {
 
-        if (Double.isNaN(value.doubleValue()) && skip_nan) {
+        if (skip_nan && Double.isNaN(value.doubleValue())) {
             return false;
         }
 
