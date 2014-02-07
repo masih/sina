@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with sina.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.mashti.sina.util;
 
 import java.util.Random;
@@ -84,9 +85,18 @@ public class RandomNumberGenerator {
      */
     public static Number generate(final ProbabilityDistribution distribution, final Random uniform_random) {
 
-        synchronized (uniform_random) {
-            return distribution.quantile(uniform_random.nextDouble());
-        }
+        return distribution.quantile(uniform_random.nextDouble());
+    }
+
+    /**
+     * Generates a non-deterministic random number that is distributed according to the given probability distribution.
+     *
+     * @param distribution the distribution
+     * @return a random number derived from the given probability distribution
+     */
+    public static Number generate(final ProbabilityDistribution distribution) {
+
+        return distribution.quantile(ThreadLocalRandom.current().nextDouble());
     }
 
     /**
