@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with sina.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.mashti.sina.distribution;
 
 import org.mashti.sina.util.NumericalRangeValidator;
@@ -36,6 +37,11 @@ public class ZipfDistribution implements ProbabilityDistribution {
         harmonic_n_exp_minus_1 = generalizedHarmonic(elements_count, exponent - ONE);
     }
 
+    public static void main(String[] args) {
+
+        System.out.println(Math.pow(8d, 1d / 3d));
+    }
+
     @Override
     public Number density(final Number x) {
 
@@ -46,13 +52,13 @@ public class ZipfDistribution implements ProbabilityDistribution {
     @Override
     public Number cumulative(final Number x) {
 
-        NumericalRangeValidator.validateRange(x, ONE, elements_count, true, true);
-        return generalizedHarmonic(x.intValue(), exponent) / harmonic_n_exp;
+        final long element = x.longValue();
+        if (element < 1 || element > elements_count) { throw new IllegalArgumentException("out of range");}
+        return generalizedHarmonic(element, exponent) / harmonic_n_exp;
     }
 
     @Override
     public Number quantile(final Number probability) {
-
         //TODO implement
         throw new UnsupportedOperationException("not implemented");
     }
@@ -100,10 +106,10 @@ public class ZipfDistribution implements ProbabilityDistribution {
      * @param m Exponent (special case {@code m = 1} is the harmonic series).
      * @return the n<sup>th</sup> generalized harmonic number.
      */
-    static double generalizedHarmonic(final int n, final double m) {
+    static double generalizedHarmonic(final long n, final double m) {
 
         double value = 0;
-        for (int k = n; k > 0; --k) {
+        for (long k = n; k > 0; --k) {
             value += 1.0 / Math.pow(k, m);
         }
         return value;

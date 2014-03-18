@@ -14,8 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with sina.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package org.mashti.sina.distribution;
 
+import java.util.Random;
 import org.junit.Test;
 
 /** @author Masih Hajiarabderkani (mh638@st-andrews.ac.uk) */
@@ -33,6 +35,13 @@ public class ZipfDistributionTest {
 
     @Test
     public void testQuantile() throws Exception {
+
+        ProbabilityDistribution distribution = new ZipfDistribution(10, 1);
+        Random random = new Random(5421);
+        for (int i = 0; i < 100; i++) {
+
+            System.out.println(distribution.quantile(random.nextDouble()));
+        }
 
     }
 
