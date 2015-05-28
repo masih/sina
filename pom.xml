@@ -56,6 +56,9 @@
             <id>org.derkani.maven</id>
             <name>Masih's Maven Repository</name>
             <url>http://maven.derkani.org</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
         </repository>
     </repositories>
 </project>
