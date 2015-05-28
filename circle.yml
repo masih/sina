@@ -1,0 +1,17 @@
+machine:
+  java:
+    version: oraclejdk8
+
+general:
+  artifacts:
+    - target/*.jar
+  branches:
+    only:
+      - master
+
+test:
+  override:
+    - mvn clean deploy
+  post:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;

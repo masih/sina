@@ -3,9 +3,8 @@ Sina
 
 A lightweight statistics and probability distributions library
 
-
 ## Build Status
-[![Build Status](https://travis-ci.org/mashti/sina.png?branch=master)](https://travis-ci.org/mashti/sina)
+[![Sina CI](https://circleci.com/gh/masih/sina.svg?style=svg)](https://circleci.com/gh/masih/sina)
 
 ## License
-The project is licensed under GNU GPL version 3.0.
+The project is licensed under BSD 3-Clause License.
